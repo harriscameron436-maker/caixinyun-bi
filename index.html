@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>才薪云｜经营分析 BI 与经营核对工作台</title>
+  <link rel="stylesheet" href="bi.css">
+  <link rel="stylesheet" href="bi2.css">
+  <link rel="stylesheet" href="ai.css">
+  <link rel="stylesheet" href="shell.css">
+  <script>
+/* 主题早绘：在首屏绘制前读 localStorage / 系统偏好写入 data-theme，避免闪烁 */
+(function(){
+  try{
+    var t=localStorage.getItem('caixinyun-theme');
+    if(t!=='dark'&&t!=='light'){
+      t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+    }
+    document.documentElement.setAttribute('data-theme',t);
+  }catch(e){document.documentElement.setAttribute('data-theme','light');}
+})();
+  </script>
+</head>
+
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brandmark">才</span><span>才薪云</span></div>
+    <div class="brand-sub">经营核对工作台 · 在线测试</div>
+    <div class="sidetitle">业务闭环</div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidefooter"><strong>演示说明</strong><br>经营 BI 共 14 个专题，进入 BI 后由左侧可滑动导航栏按「经营总览 / 组织与时间 / 成本与效率 / 业务过程 / ai助手」分组切换。网站可通过链接访问；指标计算与处理意见保存在当前浏览器，尚未接入企业生产系统。<br><br><strong>AI 助手</strong><br>右下角悬浮球可随时唤起，本地引擎作答、离线可用；答案中的数字均可追溯到源字段。<br><br><strong>数据边界</strong><br>合同、质量考核、用工社保来自企业源表并已去标识化；招投标与账期台账无业务数据，只呈现规则与模板。</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-title">AI辅助经营分析 · 扣款与结算核对</div>
+      <div class="topbar-meta">
+        <span class="tag">在线体验网站</span>
+        <span class="tag">浏览器端演示</span>
+        <span id="dataBadge">尚未导入</span>
+        <label id="cxThemeBox" for="cxTheme"><span>主题</span><select id="cxTheme" aria-label="选择界面主题"><option value="system">跟随系统</option><option value="light">明亮</option><option value="dark">暗色</option></select></label>
+      </div>
+    </header>
+    <div class="content"><div id="view"></div></div>
+  </main>
+</div>
+<button id="wsBack" type="button" data-action="bi" aria-label="返回经营BI" title="返回经营BI"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span>经营BI</span></button>
+<input id="fileInput" type="file" accept=".xlsx,.xls,.xlsm,.csv,.tsv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv,text/tab-separated-values" hidden>
+<div class="toast" id="toast" role="status"></div>
+<button id="themeToggle" type="button" aria-label="切换明暗主题"></button>
+<button id="cxMenu" type="button" aria-label="打开经营分析导航" aria-controls="cxBiRail" aria-expanded="false" hidden>☰</button>
+<div id="cxBackdrop" hidden></div>
+<script src="xlsx.full.min.js"></script>
+<script src="bi.js"></script>
+<script src="data-extra.js"></script>
+<script src="bi2.js"></script>
+<script src="app.js"></script>
+<script src="ai.js"></script>
+<script src="enhancements.js"></script>
+</body>
+</html>
